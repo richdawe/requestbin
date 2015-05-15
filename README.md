@@ -39,7 +39,7 @@ to see your data.
 The requests will be stored in memory. This means your bins
 and requests will be lost, when the RequestBin service is restarted.
 
-## Use Redis to store requests for your local instance.
+## Use Redis to store requests for your local instance
 
 See the previous section, and then:
 
