@@ -34,6 +34,9 @@ if REALM == 'prod':
     STORAGE_BACKEND = "requestbin.storage.redis.RedisStorage"
 
     REDIS_URL = os.environ.get("REDIS_URL")
+    if REDIS_URL == None:
+        REDIS_URL = os.environ.get("REDISTOGO_URL")
+
     url_parts = urlparse.urlparse(REDIS_URL)
     REDIS_HOST = url_parts.hostname
     REDIS_PORT = url_parts.port
