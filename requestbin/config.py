@@ -9,7 +9,7 @@ PORT_NUMBER = 4000
 FLASK_SESSION_SECRET_KEY = os.environ.get("SESSION_SECRET_KEY", "N1BKhJLnBqLpexOZdklsfDKFJDKFadsfs9a3r324YB7B73AglRmrHMDQ9RhXz35")
 
 BIN_TTL = 48*3600
-STORAGE_BACKEND = "requestbin.storage.memory.MemoryStorage"
+STORAGE_BACKEND = os.environ.get("REQUESTBIN_STORAGE", "requestbin.storage.memory.MemoryStorage")
 MAX_RAW_SIZE = 1024*10
 IGNORE_HEADERS = []
 MAX_REQUESTS = 20

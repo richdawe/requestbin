@@ -13,7 +13,7 @@ MIT
 Looking to self-host?
 =====================
 
-## Deploy your won local instance
+## Deploy your own local instance
 
 ```
 $ mkdir ~/Envs
@@ -38,6 +38,18 @@ to see your data.
 
 The requests will be stored in memory. This means your bins
 and requests will be lost, when the RequestBin service is restarted.
+
+## Use Redis to store requests for your local instance.
+
+See the previous section, and then:
+
+
+```
+# Exit web.py with Ctrl+C then:
+$ sudo apt-get install redis-server redis-tools
+$ export REQUESTBIN_STORAGE=requestbin.storage.redis.RedisStorage
+$ python web.py
+```
 
 ## Deploy your own instance using Heroku
 Create a Heroku account if you haven't, then grab the RequestBin source using git:
