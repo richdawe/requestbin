@@ -15,21 +15,23 @@ Looking to self-host?
 
 ## Deploy your won local instance
 
- $ mkdir ~/Envs
- $ cd ~/Envs
- $ virtualenv requestbin
- $ source ~/Envs/requestbin/bin/activate
- $ cd ~/src
-`$ git clone git://github.com/richdawe/requestbin.git
- $ sudo apt-get install libevent-dev
- $ pip install -r requirements.txt
- $ python web.py
+```
+$ mkdir ~/Envs
+$ cd ~/Envs
+$ virtualenv requestbin
+$ source ~/Envs/requestbin/bin/activate
+$ cd ~/src
+$ git clone git://github.com/richdawe/requestbin.git
+$ sudo apt-get install libevent-dev
+$ pip install -r requirements.txt
+$ python web.py
+```
 
 Browse to http://127.0.0.1:4000/ , and create a bin.
 Then post to it using a simple curl command like
 (where "tuxozftu" is the randomly-generated bin name):
 
- $ curl -X POST -d '{}' http://127.0.0.1:4000/tuxozftu
+`$ curl -X POST -d '{}' http://127.0.0.1:4000/tuxozftu`
 
 Then browse to a URL like http://127.0.0.1:4000/tuxozftu?inspect
 to see your data.
