@@ -80,6 +80,26 @@ Now just deploy via git:
 It will push to Heroku and give you a URL that your own private RequestBin will be running.
 
 
+## Running under Docker
+
+```
+$ sudo docker build -t requestbin --rm=true .
+$ sudo docker run -d -P requestbin
+```
+
+Look at the output of "docker ps" to see public-facing port (e.g.: 49153 below):
+
+```
+rdawe@phoenix:~/src/requestbin$ sudo docker ps
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                     NAMES
+7d8b937e41b7        requestbin:latest   gunicorn --chdir /va   1 seconds ago       Up 1 seconds        0.0.0.0:49153->8000/tcp   pensive_blackwell
+```
+
+TODO:
+
+ * How to automatically expose on public port 8000?
+ * How to hook up to a Redis container?
+
 Contributors
 ------------
  * Barry Carlyon <barry@barrycarlyon.co.uk>
