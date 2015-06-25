@@ -82,6 +82,14 @@ It will push to Heroku and give you a URL that your own private RequestBin will 
 
 ## Running under Docker
 
+See docker.mk, e.g.:
+
+```
+make -f docker.mk build
+make -f docker.mk run
+make -f docker.mk stop
+```
+
 ```
 $ sudo docker build -t requestbin --rm=true .
 $ sudo docker run -d -P requestbin
