@@ -1,13 +1,17 @@
 FROM ubuntu:14.04
 
-RUN apt-get update && apt-get install -y \
-  python \
-  python-dev \
-  python-pip \
-  libevent-dev
+RUN apt-get update && \
+  apt-get install -y \
+    python \
+    python-dev \
+    python-pip \
+    libevent-dev \
+  && \
+  apt-get clean
 
 COPY requirements.txt /var/tmp/requestbin/
 RUN pip install -r /var/tmp/requestbin/requirements.txt
+
 COPY . /var/tmp/requestbin/
 
 EXPOSE 8000

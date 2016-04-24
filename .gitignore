@@ -6,3 +6,5 @@ codekit-config.json
 .build.stamp
 .build.*.stamp
 
+nginx/localhost.crt
+nginx/localhost.key

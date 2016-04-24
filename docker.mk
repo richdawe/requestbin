@@ -8,11 +8,14 @@ default:	build
 .PHONY:	build
 build:	.build.stamp .build.proxy.stamp
 
+# XXX: Is this necessary, or will docker use the cache?
 .build.stamp:	Dockerfile
 	$(DOCKER) build -t requestbin-app .
 	touch $@
 
+# XXX: Is this necessary, or will docker use the cache?
 .build.proxy.stamp:	nginx/Dockerfile nginx/requestbin.conf
+	./generate-certs
 	$(DOCKER) build -t requestbin-proxy nginx
 	touch $@
 
@@ -33,7 +36,7 @@ run:	build
 		-e REQUESTBIN_STORAGE=requestbin.storage.redis.RedisStorage \
 		requestbin-app
 	$(DOCKER) run --name requestbin-proxy \
-		-d -p 8000:80 --link requestbin-app:app \
+		-d -p 8000:80 -p 8443:443 --link requestbin-app:app \
 		requestbin-proxy
 
 .PHONY:	stop
@@ -44,6 +47,12 @@ stop:
 	$(DOCKER) rm requestbin-proxy
 	$(DOCKER) rm requestbin-app
 	$(DOCKER) rm requestbin-redis
+
+.PHONY:	start
+start:	run
+
+.PHONY:	restart
+restart:	stop start
 
 .PHONY:	clean
 clean:
