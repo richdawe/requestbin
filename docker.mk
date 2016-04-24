@@ -1,3 +1,7 @@
+# XXX: Write an equivalent of this using docker compose.
+# XXX: Authentication for creating/inspecting a bin
+# XXX: Add JSON pretty printing to UI
+
 SRCDIR := $(shell pwd)
 
 SUDO = sudo
