@@ -1,6 +1,7 @@
 # XXX: Write an equivalent of this using docker compose.
-# XXX: Authentication for creating/inspecting a bin
 # XXX: Add JSON pretty printing to UI
+# XXX: Add support for ignoring requests without a specific header.
+# XXX: Allow bins to last forever.
 
 SRCDIR := $(shell pwd)
 
@@ -10,20 +11,11 @@ DOCKER = $(SUDO) docker
 default:	build
 
 .PHONY:	build
-build:	.build.stamp .build.proxy.stamp
-
-# XXX: Is this necessary, or will docker use the cache?
-.build.stamp:	Dockerfile
+build:
 	$(DOCKER) build -t requestbin-app .
-	touch $@
-
-# XXX: Is this necessary, or will docker use the cache?
-.build.proxy.stamp:	\
-		nginx/Dockerfile nginx/requestbin.conf nginx/requestbin.loc
 	./generate-certs
 	./generate-htpasswd
 	$(DOCKER) build -t requestbin-proxy nginx
-	touch $@
 
 # Use Redis as the database backend for RequestBin.
 # Proxy requests through NGINX, so we can add some authentication
