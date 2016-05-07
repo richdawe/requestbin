@@ -18,8 +18,10 @@ build:	.build.stamp .build.proxy.stamp
 	touch $@
 
 # XXX: Is this necessary, or will docker use the cache?
-.build.proxy.stamp:	nginx/Dockerfile nginx/requestbin.conf
+.build.proxy.stamp:	\
+		nginx/Dockerfile nginx/requestbin.conf nginx/requestbin.loc
 	./generate-certs
+	./generate-htpasswd
 	$(DOCKER) build -t requestbin-proxy nginx
 	touch $@
 

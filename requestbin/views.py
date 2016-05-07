@@ -37,18 +37,26 @@ def bin(name):
         bin = db.lookup_bin(name)
     except KeyError:
         return "Not found\n", 404
-    if request.query_string == 'inspect':
-        if bin.private and session.get(bin.name) != bin.secret_key:
-            return "Private bin\n", 403
-        update_recent_bins(name)
-        return render_template('bin.html',
-            bin=bin,
-            host=request.host)
-    else:
-        db.create_request(bin, request)
-        resp = make_response("ok\n")
-        resp.headers['Sponsored-By'] = "https://www.runscope.com"
-        return resp
+
+    db.create_request(bin, request)
+    resp = make_response("ok\n")
+    resp.headers['Sponsored-By'] = "https://www.runscope.com"
+    return resp
+
+
+@app.endpoint('views.bin.inspect')
+def bin(name):
+    try:
+        bin = db.lookup_bin(name)
+    except KeyError:
+        return "Not found\n", 404
+
+    if bin.private and session.get(bin.name) != bin.secret_key:
+        return "Private bin\n", 403
+    update_recent_bins(name)
+    return render_template('bin.html',
+        bin=bin,
+        host=request.host)
 
 
 @app.endpoint('views.docs')

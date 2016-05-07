@@ -2,3 +2,17 @@ location / {
   proxy_pass http://app:8000;
 }
 
+location ~* /[^/]+/inspect$ {
+  proxy_pass http://app:8000;
+
+  auth_basic "RequestBin API";
+  auth_basic_user_file htpasswd;
+}
+
+location /api {
+  proxy_pass http://app:8000;
+
+  auth_basic "RequestBin API";
+  auth_basic_user_file htpasswd;
+}
+

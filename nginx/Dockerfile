@@ -7,4 +7,5 @@ COPY localhost.crt localhost.key /etc/nginx/ssl/
 
 COPY requestbin.loc /etc/nginx/conf.d/
 COPY requestbin.conf /etc/nginx/conf.d/
+COPY htpasswd /etc/nginx/
 
