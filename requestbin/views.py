@@ -54,9 +54,13 @@ def bin(name):
     if bin.private and session.get(bin.name) != bin.secret_key:
         return "Private bin\n", 403
     update_recent_bins(name)
+    scheme=request.headers['X-Forwarded-Proto']
+    if scheme == None:
+      scheme='http'
     return render_template('bin.html',
         bin=bin,
-        host=request.host)
+        scheme=scheme,
+        host=request.headers['Host'])
 
 
 @app.endpoint('views.docs')

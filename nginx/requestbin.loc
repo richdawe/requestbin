@@ -1,8 +1,10 @@
 location / {
+  include proxy_params;
   proxy_pass http://app:8000;
 }
 
 location ~* /[^/]+/inspect$ {
+  include proxy_params;
   proxy_pass http://app:8000;
 
   auth_basic "RequestBin API";
@@ -10,6 +12,7 @@ location ~* /[^/]+/inspect$ {
 }
 
 location /api {
+  include proxy_params;
   proxy_pass http://app:8000;
 
   auth_basic "RequestBin API";
