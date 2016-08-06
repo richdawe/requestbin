@@ -3,4 +3,8 @@ nginx
 generate-certs
 generate-htpasswd
 generate-http-username
+localhost.crt
+localhost.key
+htpasswd
+password.txt
 haikunator-venv

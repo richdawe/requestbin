@@ -4,14 +4,14 @@
 # and
 # https://gist.github.com/jessedearing/2351836
 
-if [ -r nginx/localhost.key -o -r nginx/localhost.crt ]; then
-  echo "Certs already exist in nginx"
+if [ -r localhost.key -o -r localhost.crt ]; then
+  echo "Certs already exist"
   exit 0
 fi
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-  -keyout nginx/localhost.key \
-  -out nginx/localhost.crt <<EOT
+  -keyout localhost.key \
+  -out localhost.crt <<EOT
 UK
 Bristol
 Bristol

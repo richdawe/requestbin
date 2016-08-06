@@ -5,8 +5,8 @@ serviced.log
 codekit-config.json
 .build.stamp
 .build.*.stamp
-nginx/localhost.crt
-nginx/localhost.key
-nginx/htpasswd
+localhost.crt
+localhost.key
+htpasswd
 password.txt
 haikunator-venv

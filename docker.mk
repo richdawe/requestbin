@@ -34,6 +34,9 @@ run:	build
 		-e REQUESTBIN_STORAGE=requestbin.storage.redis.RedisStorage \
 		requestbin-app
 	$(DOCKER) run --name requestbin-proxy \
+		-v $(SRCDIR)/htpasswd:/etc/nginx/htpasswd \
+		-v $(SRCDIR)/localhost.crt:/etc/nginx/ssl/localhost.crt \
+		-v $(SRCDIR)/localhost.key:/etc/nginx/ssl/localhost.key \
 		-d -p 8000:80 -p 8443:443 --link requestbin-app:app \
 		requestbin-proxy
 
