@@ -9,3 +9,4 @@ nginx/localhost.crt
 nginx/localhost.key
 nginx/htpasswd
 password.txt
+haikunator-venv

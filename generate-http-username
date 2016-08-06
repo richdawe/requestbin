@@ -1,0 +1,5 @@
+#!/usr/bin/python
+# Requires https://github.com/Atrox/haikunatorpy
+from haikunator import Haikunator
+haikunator = Haikunator()
+print(haikunator.haikunate())

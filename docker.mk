@@ -56,3 +56,4 @@ restart:	stop start
 clean:
 	rm -f .build.stamp
 	rm -f .build.proxy.stamp
+	rm -f haikunator-venv

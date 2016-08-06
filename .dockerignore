@@ -1,2 +1,6 @@
 docker.mk
 nginx
+generate-certs
+generate-htpasswd
+generate-http-username
+haikunator-venv
