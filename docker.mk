@@ -3,6 +3,9 @@
 # XXX: Add support for ignoring requests without a specific header.
 # XXX: Allow bins to last forever.
 
+# Change this to your Docker Hub username.
+DOCKER_USERNAME = richdawe
+
 SRCDIR := $(shell pwd)
 
 SUDO = sudo
@@ -12,10 +15,10 @@ default:	build
 
 .PHONY:	build
 build:
-	$(DOCKER) build -t requestbin-app .
+	$(DOCKER) build -t $(DOCKER_USERNAME)/requestbin-app .
 	./generate-certs
 	./generate-htpasswd
-	$(DOCKER) build -t requestbin-proxy nginx
+	$(DOCKER) build -t $(DOCKER_USERNAME)/requestbin-proxy nginx
 
 # Use Redis as the database backend for RequestBin.
 # Proxy requests through NGINX, so we can add some authentication
@@ -32,13 +35,13 @@ run:	build
 		-d --link requestbin-redis:db \
 		-e REQUESTBIN_REDIS_HOST=db \
 		-e REQUESTBIN_STORAGE=requestbin.storage.redis.RedisStorage \
-		requestbin-app
+		$(DOCKER_USERNAME)/requestbin-app
 	$(DOCKER) run --name requestbin-proxy \
 		-v $(SRCDIR)/htpasswd:/etc/nginx/htpasswd \
 		-v $(SRCDIR)/localhost.crt:/etc/nginx/ssl/localhost.crt \
 		-v $(SRCDIR)/localhost.key:/etc/nginx/ssl/localhost.key \
 		-d -p 8000:80 -p 8443:443 --link requestbin-app:app \
-		requestbin-proxy
+		$(DOCKER_USERNAME)/requestbin-proxy
 
 .PHONY:	stop
 stop:
