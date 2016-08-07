@@ -63,3 +63,8 @@ clean:
 	rm -f .build.stamp
 	rm -f .build.proxy.stamp
 	rm -f haikunator-venv
+
+.PHONY:	push
+push:
+	$(DOCKER) push $(DOCKER_USERNAME)/requestbin-app
+	$(DOCKER) push $(DOCKER_USERNAME)/requestbin-proxy
